@@ -8,29 +8,37 @@ const scoreDisplay = document.getElementById('score');
 
 
 const allShapes = [
+    // 2x2 Square (basic)
     { shape: [[1, 1], [1, 1]], name: 'Square 2x2', id: 'Square-0', color: 'cyan' },
 
+    // 3x3 Square (full square)
     { shape: [[1, 1, 1], [1, 1, 1], [1, 1, 1]], name: 'Square 3x3', id: 'Square-1', color: 'yellow' },
 
+    // 4-block Line (horizontal)
     { shape: [[1, 1, 1, 1]], name: 'Line 4', id: 'Line-0', color: 'chartreuse' },
 
+// 5-block Line (horizontal)
 { shape: [[1, 1, 1, 1, 1]], name: 'Line 5', id: 'Line-1', color: 'rgb(170, 50, 255)' },
 
+    // 4-block Line (vertical)
     { shape: [[1], [1], [1], [1]], name: 'Line 4 (Vertical)', id: 'Line-2', color: 'magenta' },
 
+    // 5-block Line (vertical)
     { shape: [[1], [1], [1], [1], [1]], name: 'Line 5 (Vertical)', id: 'Line-3', color: 'fuchsia' },
 
+    // L-shape (rotated variations)
     { shape: [[1, 1, 0], [1, 1, 1]], name: 'L-shape', id: 'L-0', color: 'tomato' },
     { shape: [[1, 0], [1, 0], [1, 1]], name: 'L-shape rotated 90', id: 'L-1', color: 'limegreen' },
     { shape: [[1, 1], [0, 1], [0, 1]], name: 'L-shape rotated 180', id: 'L-2', color: 'orange' },
     { shape: [[0, 1], [0, 1], [1, 1]], name: 'L-shape rotated 270', id: 'L-3', color: 'dodgerblue' },
 
-
+    // J-shape (rotated variations)
     { shape: [[1, 1, 1], [1, 0, 0]], name: 'J-shape', id: 'J-0', color: 'blue' },
     { shape: [[0, 1], [0, 1], [1, 1]], name: 'J-shape rotated 90', id: 'J-1', color: 'green' },
     { shape: [[0, 0, 1], [1, 1, 1]], name: 'J-shape rotated 180', id: 'J-2', color: 'purple' },
     { shape: [[1, 1], [1, 0], [1, 0]], name: 'J-shape rotated 270', id: 'J-3', color: 'red' },
 
+    // T-shape (rotated variations)
     { shape: [[1, 1, 1], [0, 1, 0]], name: 'T-shape', id: 'T-0', color: 'violet' },
     { shape: [[0, 1], [1, 1], [0, 1]], name: 'T-shape rotated 90', id: 'T-1', color: 'turquoise' },
     { shape: [[0, 1, 0], [1, 1, 1]], name: 'T-shape rotated 180', id: 'T-2', color: 'plum' },
@@ -92,7 +100,7 @@ let score = 0;
 let gameActive = true;
 let availableShapes = [];
 
-
+// Create the grid
 function createGrid() {
     gridElement.innerHTML = '';
     grid.forEach(row => {
@@ -370,7 +378,7 @@ gridElement.addEventListener('mouseout', () => {
     previewCells.forEach(cell => cell.classList.remove('highlight')); // Remove highlight
 });
 
-// Reset button
+// Reset game button
 resetButton.addEventListener('click', () => {
     resetGame();
 });
@@ -378,17 +386,19 @@ resetButton.addEventListener('click', () => {
 // Restart game button
 restartButton.addEventListener('click', () => {
     resetGame();
-    endScreen.style.display = 'none'; 
+    endScreen.style.display = 'none'; // Hide end screen
 });
 
 // Reset the game
 function resetGame() {
-    grid = Array(8).fill(null).map(() => Array(8).fill(0)); 
-    score = 0; 
-    availableShapes = getRandomShapes(); 
-    renderShapes(); 
-    scoreDisplay.textContent = `Score: ${score}`;
-    gameActive = true; 
+    grid = Array(8).fill(null).map(() => Array(8).fill(0)); // Reset grid
+    score = 0; // Reset score
+    availableShapes = getRandomShapes(); // Get initial random shapes
+    createGrid();
+    renderShapes(); // Render initial shapes
+    scoreDisplay.textContent = `Score: ${score}`; // Update score display
+    gameActive = true; // Set game to active
 }
 
-resetGame(); 
+// Initial setup
+resetGame(); // Initialize the game
